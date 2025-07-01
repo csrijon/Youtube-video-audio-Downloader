@@ -1,0 +1,142 @@
+.downloader-wrapper {
+    /* width: 100vw; */
+    overflow-x: hidden;
+    height: 800px;
+    background: linear-gradient(to bottom right, #6366f1, #a855f7, #ec4899);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.downloader-card {
+    padding: 40px 30px;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 700px;
+    text-align: center;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Title */
+.downloader-title {
+    font-size: 30px;
+    font-weight: bold;
+    color: #1f2937;
+    margin-bottom: 25px;
+}
+
+.url-input {
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 16px;
+    border: 1px solid #d1d5db;
+    /* subtle gray */
+    border-radius: 14px;
+    background-color: #f9fafb;
+    color: #1f2937;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.url-input::placeholder {
+    color: #9ca3af;
+    font-size: 15px;
+}
+
+.url-input:focus {
+    border-color: #6366f1;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+    outline: none;
+}
+
+/* Type Toggle Buttons */
+.type-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.type-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 50px;
+    background-color: #e5e7eb;
+    color: #374151;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.type-btn:hover {
+    background-color: #d1d5db;
+}
+
+.type-btn.active {
+    background-color: #6366f1;
+    color: white;
+    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+}
+
+/* Fetch Button */
+.fetch-btn {
+    width: 100%;
+    padding: 16px;
+    font-size: 17px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(to right, #a855f7, #6366f1);
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.fetch-btn:hover {
+    transform: scale(1.04);
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .downloader-card {
+        padding: 24px 18px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .downloader-title {
+        font-size: 24px;
+    }
+
+    .type-btn {
+        padding: 10px 18px;
+        font-size: 14px;
+    }
+
+    .fetch-btn {
+        font-size: 15px;
+    }
+
+    .url-input {
+        padding: 14px;
+    }
+}
