@@ -1,6 +1,7 @@
-import React from 'react'
-import srijonimage from "../assets/srijon sikkim .jpeg"
-import  { useState } from 'react';
+
+import { Link } from 'react-router-dom';
+import logo from '../assets/srijon.jpeg'
+import { useState } from 'react';
 import "./Navbar.css"
 
 const Navbar = () => {
@@ -8,7 +9,7 @@ const Navbar = () => {
 
   const toggleMenu = () => setIsOpen(!isOpen);
   return (
-   <div className="navbar-wrapper">
+    <div className="navbar-wrapper">
       <nav className="navbar">
         <div className="left-nav">
           <p className="logo">YT Fetch</p>
@@ -16,14 +17,14 @@ const Navbar = () => {
 
         <div className={`nav-links ${isOpen ? 'active' : ''}`}>
           <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/features">Features</a></li>
-            <li><a href="/about">About</a></li>
+            <li> <Link to="/login">Login again</Link></li>
+            <li><Link to="/Music">Music Downloader</Link></li>
+            <li><Link to="/Video">Video Downloader</Link></li>
           </ul>
         </div>
 
         <div className="right-nav">
-          <img src={srijonimage} alt="Profile" />
+          <img src={logo} alt="Profile" />
           <div className="hamburger" onClick={toggleMenu}>
             <div className={`bar ${isOpen ? 'rotate1' : ''}`}></div>
             <div className={`bar ${isOpen ? 'hide' : ''}`}></div>

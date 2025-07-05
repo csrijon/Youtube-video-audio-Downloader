@@ -1,0 +1,95 @@
+.audio-wrapper {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f172a, #1e3a8a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.audio-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-radius: 20px;
+    padding: 36px 28px;
+    text-align: center;
+    max-width: 440px;
+    width: 100%;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease;
+}
+
+.audio-card:hover {
+    transform: scale(1.015);
+}
+
+.audio-title {
+    font-size: 28px;
+    margin-bottom: 24px;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.audio-input {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 14px;
+    border: 1.5px solid #3f3f3f;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-size: 16px;
+    outline: none;
+    margin-bottom: 22px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.audio-input::placeholder {
+    color: #bbbbbb;
+}
+
+.audio-input:focus {
+    border-color: #8b5cf6;
+    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.2);
+}
+
+.audio-fetch-btn {
+    background: linear-gradient(to right, #3b82f6, #06b6d4);
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 14px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.audio-fetch-btn:hover {
+    background: linear-gradient(to right, #4f46e5, #9333ea);
+    transform: scale(1.05);
+}
+
+.audio-features {
+    margin-top: 30px;
+    text-align: left;
+    color: #d4d4d4;
+}
+
+.audio-features h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #f9fafb;
+}
+
+.audio-features ul {
+    list-style: disc inside;
+}
+
+.audio-features li {
+    margin-bottom: 8px;
+    font-size: 14.5px;
+}
