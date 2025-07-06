@@ -3,6 +3,7 @@ import Home from './components/Home'
 import Footer from './components/Footer'
 import AudioDownloader from './components/AudioDownloader'
 import VideoDownloader from './components/VideoDownloader'
+import DownloadMusic from './components/DownloadMusic'
 import { RouterProvider ,createBrowserRouter } from 'react-router'
 import './App.css'
 
@@ -11,7 +12,7 @@ function App() {
   const router = createBrowserRouter ([
     {
       path: "/",
-      element: <><Navbar/><Home/><Footer/></>
+      element: <><Navbar/><Home/><Footer/><DownloadMusic/></>
     },
     {
       path: "/Music",

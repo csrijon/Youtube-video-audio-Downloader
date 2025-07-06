@@ -1,48 +1,68 @@
 import express from "express";
 import cors from "cors";
-import ytdl from '@distube/ytdl-core';
-import fs from "fs";
+import ytdl from "@distube/ytdl-core";
+import ffmpeg from "fluent-ffmpeg";
 import path from "path";
+import fs from "fs";
 import { fileURLToPath } from "url";
 
+// __dirname setup
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const port = 3000;
 const app = express();
-app.use(express.json());
+const port = 3000;
+
 app.use(cors());
+app.use(express.json());
+app.use(express.static("Public"))
 
-app.get("/", (req, res) => {
-  res.send("hello i am a noob");
-});
-app.post("/Videofetch", async (req, res) => {
+app.post("/songfetch", async (req, res) => {
   const { url } = req.body;
-  console.log("Received URL:", url);
 
-  const folderPath = path.join(__dirname, 'video');
-  if (!fs.existsSync(folderPath)) {
-    fs.mkdirSync(folderPath);
+  if (!url) {
+    return res.status(400).json({ message: "No URL provided" });
   }
-  const filePath = path.join(folderPath, `${Date.now()}.mp4`);
+
+  const outputPath = path.join(__dirname,"song.mp3");
+
   try {
-    const streamvideo = ytdl(url, {
-      quality: "18",
-      filter: 'audioandvideo',
-    });
+    // Delete old file if exists
+    if (fs.existsSync(outputPath)) {
+      fs.unlinkSync(outputPath);
+    }
 
-    streamvideo.pipe(fs.createWriteStream(filePath));
+    // ✅ Use high-quality audio stream (itag 251 = webm+opus)
+    const audioStream = ytdl(url, { quality: "251" }); // Opus 160 kbps
 
+    ytdl(url)
+      .pipe(fs.createWriteStream('video.mp4'));
+
+
+    ffmpeg(audioStream)
+      .audioCodec("libmp3lame")
+      .format("mp3")
+      .audioBitrate("128k")
+      .on("start", () => {
+        console.log("🎧 Conversion started...");
+      })
+      .on("end", () => {
+        console.log("✅ Audio saved as output.mp3");
+      })
+      .on("error", (err) => {
+        console.error("❌ FFmpeg error:", err.message);
+      })
+     .save(path.join(__dirname, "Public", "audio", "song.mp3"));
     res.status(200).json({
-      message: "Video is being downloaded",
-      filePath: filePath,
+      message: "Audio conversion started. Check output.mp3 after a while.",
     });
-  } catch (error) {
-    console.error("Error downloading video:", error);
-    res.status(500).json({ message: "Failed to download video" });
+
+  } catch (err) {
+    console.error("❌ Server error:", err.message);
+    res.status(500).json({ message: "Conversion failed." });
   }
 });
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`🚀 Server running at http://localhost:${port}`);
 });
