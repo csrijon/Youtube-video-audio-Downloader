@@ -52,9 +52,10 @@ app.post("/songfetch", async (req, res) => {
       .on("error", (err) => {
         console.error("❌ FFmpeg error:", err.message);
       })
-     .save(path.join(__dirname, "Public", "audio", "song.mp3"));
+     .save(path.join(__dirname, "Public", "Audio", "song.mp3"));
     res.status(200).json({
       message: "Audio conversion started. Check output.mp3 after a while.",
+      url: "http://localhost:3000/Audio/song.mp3"
     });
 
   } catch (err) {

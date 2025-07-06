@@ -3,6 +3,7 @@ import './VideoDownloader.css';
 
 const VideoDownloader = () => {
   const [url, setUrl] = useState('');
+  const [music, updatemusicurl] =  useState('');
   const [quality, setQuality] = useState('720p');
   const videoRef = useRef(null);
   const videourlref = useRef(null);
@@ -24,7 +25,7 @@ const VideoDownloader = () => {
       // quality: videoquality,
     };
 
-    const videofetchurl = "http://localhost:3000/Videofetch";
+    const videofetchurl = "http://localhost:3000/songfetch";
     const requestOptions = {
       method: "post",
       headers: {
@@ -36,6 +37,8 @@ const VideoDownloader = () => {
     try {
       const videoresponse = await fetch(videofetchurl, requestOptions);
       const videodata = await videoresponse.json()
+       updatemusicurl(videodata.url)
+
       console.log('Fetched video data:', videodata);
     } catch (error) {
       console.error("Error fetching video:", error);
@@ -74,6 +77,7 @@ const VideoDownloader = () => {
         >
           Fetch Video
         </button>
+        <a href={music}></a>
       </div>
     </div>
   );

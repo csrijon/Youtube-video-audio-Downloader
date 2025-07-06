@@ -20,7 +20,7 @@ function App() {
     },
     {
       path: "/Video",
-      element: <><Navbar/><VideoDownloader/><Footer/></>
+      element: <><Navbar/><VideoDownloader /><Footer/></>
     }
   ])
 
