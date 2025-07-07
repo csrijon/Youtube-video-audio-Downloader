@@ -35,10 +35,6 @@ app.post("/songfetch", async (req, res) => {
     // ✅ Use high-quality audio stream (itag 251 = webm+opus)
     const audioStream = ytdl(url, { quality: "251" }); // Opus 160 kbps
 
-    ytdl(url)
-      .pipe(fs.createWriteStream('video.mp4'));
-
-
     ffmpeg(audioStream)
       .audioCodec("libmp3lame")
       .format("mp3")

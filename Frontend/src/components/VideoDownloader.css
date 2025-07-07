@@ -224,3 +224,10 @@
     height: 50px;
   }
 }
+.download-section {
+  background: linear-gradient(to right, #0f172a, #1e3a8a); /* or any solid bg color */
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
