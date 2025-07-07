@@ -64,6 +64,17 @@ app.post("/songfetch", async (req, res) => {
   }
 });
 
+app.get("/download", (req, res) => {
+  const filePath = path.join(__dirname, "Public", "Audio", "song.mp3");
+  res.download(filePath, "song.mp3", (err) => {
+    if (err) {
+      console.error("Download error:", err);
+      res.status(500).send("Download failed");
+    }
+  });
+});
+
+
 app.listen(port, () => {
   console.log(`🚀 Server running at http://localhost:${port}`);
 });
