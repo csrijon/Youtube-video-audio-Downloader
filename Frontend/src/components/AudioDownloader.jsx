@@ -3,20 +3,18 @@ import './AudioDownloader.css';
 
 const AudioDownloader = () => {
   const [url, setUrl] = useState('');
+   const [quality, setQuality] = useState('720p');
   const urlref = useRef(null);
 
-  const fetchmp3click = () => {
+  const fetchmp3click = async () => {
     const urlValue = urlref.current.value;
     console.log("Fetching MP3 for URL:", urlValue);
-    urlref.current.value = '';
-    setUrl('');
-    // You can add routing or API call here
   };
 
   return (
     <div className="audio-wrapper">
       <div className="audio-card">
-        <h1 className="audio-title">🎵 YouTube Audio Downloader</h1>
+        <h1 className="audio-title">🎵 YouTube Video Downloader</h1>
 
         <input
           type="text"
@@ -27,11 +25,23 @@ const AudioDownloader = () => {
           onChange={(e) => setUrl(e.target.value)}
         />
 
+         <select
+            className="quality-select"
+            value={quality}
+            onChange={(e) => setQuality(e.target.value)}
+            // ref={videoRef}
+          >
+            <option value="1080p">18</option>
+            <option value="720p">22</option>
+            <option value="480p">37</option>
+            <option value="360p">59</option>
+          </select>
+
         <button
           className="audio-fetch-btn"
           onClick={fetchmp3click}
         >
-          Fetch MP3
+          Fetch Video
         </button>
 
         <div className="audio-features">

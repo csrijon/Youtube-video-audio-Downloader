@@ -5,15 +5,12 @@ import './VideoDownloader.css';
 const VideoDownloader = () => {
   const [url, setUrl] = useState('');
   const [music, updatemusicurl] = useState('');
-  const [quality, setQuality] = useState('720p');
+  // const [quality, setQuality] = useState('720p');
   const [loading, setLoading] = useState(false);
-  const videoRef = useRef(null);
+  // const videoRef = useRef(null);
   const videourlref = useRef(null);
 
   const fetchvideoclick = async () => {
-    const videoquality = videoRef.current.value;
-    console.log('Selected quality:', videoquality);
-
     const videourl = videourlref.current.value;
     console.log('Video URL:', videourl);
 
@@ -48,7 +45,7 @@ const VideoDownloader = () => {
     <>
       <div className="video-wrapper">
         <div className="video-card">
-          <h1 className="video-title">📺 YouTube Video Downloader</h1>
+          <h1 className="video-title">📺 YouTube Music Downloader</h1>
 
           <input
             type="text"
@@ -59,7 +56,7 @@ const VideoDownloader = () => {
             ref={videourlref}
           />
 
-          <select
+          {/* <select
             className="quality-select"
             value={quality}
             onChange={(e) => setQuality(e.target.value)}
@@ -69,10 +66,10 @@ const VideoDownloader = () => {
             <option value="720p">22</option>
             <option value="480p">135</option>
             <option value="360p">18</option>
-          </select>
+          </select> */}
 
           <button className="video-fetch-btn" onClick={fetchvideoclick}>
-            Fetch Video
+            Fetch Audio
           </button>
 
           {loading && (
