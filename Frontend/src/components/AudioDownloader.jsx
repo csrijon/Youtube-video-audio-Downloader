@@ -5,11 +5,43 @@ const AudioDownloader = () => {
   const [url, setUrl] = useState('');
    const [quality, setQuality] = useState('720p');
   const urlref = useRef(null);
+  const videoref = useRef(null)
 
-  const fetchmp3click = async () => {
-    const urlValue = urlref.current.value;
-    console.log("Fetching MP3 for URL:", urlValue);
+const fetchmp3click = async () => {
+  const urlValue = urlref.current.value;
+  const videovalue = videoref.current.value;
+
+  if (!urlValue || !videovalue) {
+    console.log("Please provide both URL and video quality.");
+    return;
+  }
+
+  const dataToSend = {
+    videourlvalue: urlValue,
+    videoqualityvalue: videovalue
   };
+
+  const videourl = "http://localhost:3000/videofetch";
+  const videooption = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(dataToSend)
+  };
+
+  try {
+    const response = await fetch(videourl, videooption);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const result = await response.json();
+    console.log(result);
+  } catch (error) {
+    console.log("hello", error);
+  }
+  console.log("Fetching MP3 for URL:", urlValue, videovalue);
+};
+
 
   return (
     <div className="audio-wrapper">
@@ -29,7 +61,7 @@ const AudioDownloader = () => {
             className="quality-select"
             value={quality}
             onChange={(e) => setQuality(e.target.value)}
-            // ref={videoRef}
+            ref={videoref}
           >
             <option value="1080p">18</option>
             <option value="720p">22</option>
