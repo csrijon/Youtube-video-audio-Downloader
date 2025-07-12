@@ -23,7 +23,7 @@ const fetchmp3click = async () => {
 
   const videourl = "http://localhost:3000/videofetch";
   const videooption = {
-    method: "GET",
+    method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(dataToSend)
   };
@@ -41,7 +41,6 @@ const fetchmp3click = async () => {
   }
   console.log("Fetching MP3 for URL:", urlValue, videovalue);
 };
-
 
   return (
     <div className="audio-wrapper">
@@ -63,10 +62,10 @@ const fetchmp3click = async () => {
             onChange={(e) => setQuality(e.target.value)}
             ref={videoref}
           >
-            <option value="1080p">18</option>
-            <option value="720p">22</option>
-            <option value="480p">37</option>
-            <option value="360p">59</option>
+            <option value="240p">133</option>
+            <option value="480p">135</option>
+            <option value="720p">136</option>
+            <option value="1080p">137</option>
           </select>
 
         <button

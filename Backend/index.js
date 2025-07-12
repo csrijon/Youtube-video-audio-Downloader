@@ -5,6 +5,7 @@ import ffmpeg from "fluent-ffmpeg";
 import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
+import { on } from "events";
 
 // __dirname setup
 const __filename = fileURLToPath(import.meta.url);
@@ -69,10 +70,26 @@ app.get("/download", (req, res) => {
     }
   });
 });
+app.post("/videofetch", (req, res) => {
+  const { videourlvalue, videoqualityvalue } = req.body;
+  console.log(videoqualityvalue, videourlvalue);
 
-app.get("/videofetch",(req,res) => {
-  
-})
+  const output = fs.createWriteStream("srijonvideos.mp4");
+  const songoutput = fs.createWriteStream("srijonmusic.mp3")
+
+ const videostrems = ytdl(videourlvalue, { quality:"137" })
+ const audiomusic =   ytdl(videourlvalue, {quality:"251"})
+    videostrems.pipe(output)
+   audiomusic.pipe(songoutput)
+    .on("finish", () => {
+      console.log("✅ Download complete");
+      res.send("✅ Video downloaded successfully");
+    })
+    .on("error", (err) => {
+      console.error("❌ Error occurred:", err);
+      res.status(500).send("❌ Failed to download video");
+    });
+});
 
 app.listen(port, () => {
   console.log(`🚀 Server running at http://localhost:${port}`);
