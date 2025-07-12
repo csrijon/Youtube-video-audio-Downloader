@@ -71,25 +71,72 @@ app.get("/download", (req, res) => {
   });
 });
 app.post("/videofetch", (req, res) => {
-  const { videourlvalue, videoqualityvalue } = req.body;
-  console.log(videoqualityvalue, videourlvalue);
+  const { videourlvalue } = req.body;
 
-  const output = fs.createWriteStream("srijonvideos.mp4");
-  const songoutput = fs.createWriteStream("srijonmusic.mp3")
+  const videoPath = "srijonvideos.mp4";
+  const audioPath = "srijonmusic.webm";
+  const outputPath = path.join("Public", "Video", "ytdone.mp4");
 
- const videostrems = ytdl(videourlvalue, { quality:"137" })
- const audiomusic =   ytdl(videourlvalue, {quality:"251"})
-    videostrems.pipe(output)
-   audiomusic.pipe(songoutput)
-    .on("finish", () => {
-      console.log("✅ Download complete");
-      res.send("✅ Video downloaded successfully");
-    })
+  let isVideoDone = false;
+  let isAudioDone = false;
+
+  const checkAndMerge = () => {
+    if (isVideoDone && isAudioDone) {
+      const outputDir = path.join("Public", "Video");
+
+      //  Ensure output directory exists
+      if (!fs.existsSync(outputDir)) {
+        fs.mkdirSync(outputDir, { recursive: true });
+      }
+
+      ffmpeg()
+        .input(videoPath)
+        .input(audioPath)
+        .videoCodec("copy")
+        .audioCodec("aac")
+        .outputOptions("-b:a", "128k")
+        .outputOptions("-shortest")
+        .on("end", () => {
+          console.log("✅ Merge done");
+          res.download(outputPath); // Send final merged video to frontend
+        })
+        .on("error", (err) => {
+          console.error("❌ Merge error:", err);
+          res.status(500).send("❌ Merge failed");
+        })
+        .save(outputPath);
+    }
+  };
+
+  // ✅ Step 1: Download video
+  const videoStream = fs.createWriteStream(videoPath);
+  ytdl(videourlvalue, { quality: "137" }) // Best 1080p video-only stream
     .on("error", (err) => {
-      console.error("❌ Error occurred:", err);
-      res.status(500).send("❌ Failed to download video");
+      console.error("❌ Video error:", err);
+      res.status(500).send("❌ Video download failed");
+    })
+    .pipe(videoStream)
+    .on("finish", () => {
+      console.log("✅ Video download complete");
+      isVideoDone = true;
+      checkAndMerge();
+    });
+
+  // ✅ Step 2: Download audio
+  const audioStream = fs.createWriteStream(audioPath);
+  ytdl(videourlvalue, { quality: "251" }) // Best Opus audio stream (webm)
+    .on("error", (err) => {
+      console.error("❌ Audio error:", err);
+      res.status(500).send("❌ Audio download failed");
+    })
+    .pipe(audioStream)
+    .on("finish", () => {
+      console.log("✅ Audio download complete");
+      isAudioDone = true;
+      checkAndMerge();
     });
 });
+
 
 app.listen(port, () => {
   console.log(`🚀 Server running at http://localhost:${port}`);

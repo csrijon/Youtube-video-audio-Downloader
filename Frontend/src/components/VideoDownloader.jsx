@@ -55,19 +55,6 @@ const VideoDownloader = () => {
             onChange={(e) => setUrl(e.target.value)}
             ref={videourlref}
           />
-
-          {/* <select
-            className="quality-select"
-            value={quality}
-            onChange={(e) => setQuality(e.target.value)}
-            ref={videoRef}
-          >
-            <option value="1080p">137</option>
-            <option value="720p">22</option>
-            <option value="480p">135</option>
-            <option value="360p">18</option>
-          </select> */}
-
           <button className="video-fetch-btn" onClick={fetchvideoclick}>
             Fetch Audio
           </button>
@@ -82,33 +69,43 @@ const VideoDownloader = () => {
           <a href={music}></a>
         </div>
       </div>
-{music && (
-  <div className="download-section"> {/* ✅ Wrapper added */}
-    <div className="music-download-card">
-      <h3 className="music-label">🎧 MP3 is Ready!</h3>
-      <div className="music-box">
-        <div className="music-info">
-          <img
-            src="https://via.placeholder.com/60"
-            alt="thumbnail"
-            className="music-thumbnail"
-          />
-          <div>
-            <p className="music-title">Your Downloaded Song</p>
-            <p className="music-filename">song.mp3</p>
+      {music && (
+        <div className="download-section"> {/* ✅ Wrapper added */}
+          <div className="music-download-card">
+            <h3 className="music-label">🎧 MP3 is Ready!</h3>
+            <div className="music-box">
+              <div className="music-info">
+                <img
+                  src="https://via.placeholder.com/60"
+                  alt="thumbnail"
+                  className="music-thumbnail"
+                />
+                <div>
+                  <p className="music-title">Your Downloaded Song</p>
+                  <p className="music-filename">song.mp3</p>
+                </div>
+              </div>
+              <a
+                href="#"
+                className="download-music-btn"
+                onClick={(e) => {
+                  e.preventDefault(); // prevent immediate download
+                  const button = e.currentTarget;
+                  button.textContent = "Preparing music..."; // show feedback
+
+                  setTimeout(() => {
+                    window.location.href = "http://localhost:3000/download"; // trigger download after delay
+                    button.textContent = "Download Music"; // optional reset
+                  }, 10000); // 3-second delay (adjust as needed)
+                }}
+              >
+                Download Music
+              </a>
+
+            </div>
           </div>
         </div>
-        <a
-          href="http://localhost:3000/download"
-          className="download-music-btn"
-          download
-        >
-          ⬇️ Download MP3
-        </a>
-      </div>
-    </div>
-  </div>
-)}
+      )}
 
     </>
   );
