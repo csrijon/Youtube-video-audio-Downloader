@@ -17,9 +17,9 @@ const Navbar = () => {
 
         <div className={`nav-links ${isOpen ? 'active' : ''}`}>
           <ul>
-            <li> <Link to="/login">Login again</Link></li>
-            <li><Link to="/Music">Music Downloader</Link></li>
-            <li><Link to="/Video">Video Downloader</Link></li>
+            <li> <Link to="/login">Video</Link></li>
+            <li><Link to="/Music">Video Downloader</Link></li>
+            <li><Link to="/Video">Audio Downloader</Link></li>
           </ul>
         </div>
 

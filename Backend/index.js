@@ -25,7 +25,7 @@ app.post("/songfetch", async (req, res) => {
     return res.status(400).json({ message: "No URL provided" });
   }
 
-  const outputPath = path.join(__dirname,"song.mp3");
+  const outputPath = path.join(__dirname, "song.mp3");
 
   try {
     // Delete old file if exists
@@ -33,7 +33,6 @@ app.post("/songfetch", async (req, res) => {
       fs.unlinkSync(outputPath);
     }
 
-    // ✅ Use high-quality audio stream (itag 251 = webm+opus)
     const audioStream = ytdl(url, { quality: "251" }); // Opus 160 kbps
 
     ffmpeg(audioStream)
@@ -49,7 +48,7 @@ app.post("/songfetch", async (req, res) => {
       .on("error", (err) => {
         console.error("❌ FFmpeg error:", err.message);
       })
-     .save(path.join(__dirname, "Public", "Audio", "song.mp3"));
+      .save(path.join(__dirname, "Public", "Audio", "song.mp3"));
     res.status(200).json({
       message: "Audio conversion started. Check output.mp3 after a while.",
       url: "http://localhost:3000/Audio/song.mp3"
