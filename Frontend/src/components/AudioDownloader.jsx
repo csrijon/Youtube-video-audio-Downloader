@@ -3,44 +3,43 @@ import './AudioDownloader.css';
 
 const AudioDownloader = () => {
   const [url, setUrl] = useState('');
-   const [quality, setQuality] = useState('720p');
+  const [quality, setQuality] = useState('720p');
   const urlref = useRef(null);
   const videoref = useRef(null)
 
-const fetchmp3click = async () => {
-  const urlValue = urlref.current.value;
-  const videovalue = videoref.current.value;
+  const fetchmp3click = async () => {
+    const urlValue = urlref.current.value;
+    const videovalue = videoref.current.value;
 
-  if (!urlValue || !videovalue) {
-    console.log("Please provide both URL and video quality.");
-    return;
-  }
-
-  const dataToSend = {
-    videourlvalue: urlValue,
-    videoqualityvalue: videovalue
-  };
-
-  const videourl = "http://localhost:3000/videofetch";
-  const videooption = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(dataToSend)
-  };
-
-  try {
-    const response = await fetch(videourl, videooption);
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+    if (!urlValue || !videovalue) {
+      console.log("Please provide both URL and video quality.");
+      return;
     }
-    const result = await response.json();
-    console.log(result);
-  } catch (error) {
-    console.log("hello", error);
-  }
-  console.log("Fetching MP3 for URL:", urlValue, videovalue);
-};
+    const dataToSend = {
+      videourlvalue: urlValue,
+      videoqualityvalue: videovalue
+    };
+
+    const videourl = "http://localhost:3000/videofetch";
+    const videooption = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dataToSend)
+    };
+
+    try {
+      const response = await fetch(videourl, videooption);
+      setUrl('')
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const result = await response.json();
+      console.log(result);
+    } catch (error) {
+      console.log("hello", error);
+    }
+    console.log("Fetching MP3 for URL:", urlValue, videovalue);
+  };
 
   return (
     <div className="audio-wrapper">
@@ -56,17 +55,17 @@ const fetchmp3click = async () => {
           onChange={(e) => setUrl(e.target.value)}
         />
 
-         <select
-            className="quality-select"
-            value={quality}
-            onChange={(e) => setQuality(e.target.value)}
-            ref={videoref}
-          >
-            <option value="240p">133</option>
-            <option value="480p">135</option>
-            <option value="720p">136</option>
-            <option value="1080p">137</option>
-          </select>
+        <select
+          className="quality-select"
+          value={quality}
+          onChange={(e) => setQuality(e.target.value)}
+          ref={videoref}
+        >
+          <option value="240p">133</option>
+          <option value="480p">135</option>
+          <option value="720p">136</option>
+          <option value="1080p">137</option>
+        </select>
 
         <button
           className="audio-fetch-btn"
@@ -78,6 +77,8 @@ const fetchmp3click = async () => {
         <div className="audio-features">
           <h3>✨ Features</h3>
           <ul>
+            <li>Which video do you want to download from the YouTube link? First, check what quality options are available in Youtube Then select quality and do Download</li>
+            <li>itag 133 = 240p,135=480p,136=720p,137=1080p</li>
             <li>Download high-quality audio from YouTube links.</li>
             <li>Fast and reliable conversion process.</li>
             <li>No signup required – it's free and easy!</li>

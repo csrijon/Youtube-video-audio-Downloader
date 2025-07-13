@@ -69,8 +69,9 @@ app.get("/download", (req, res) => {
     }
   });
 });
+
 app.post("/videofetch", (req, res) => {
-  const { videourlvalue } = req.body;
+  const { videourlvalue,videoqualityvalue } = req.body;
 
   const videoPath = "srijonvideos.mp4";
   const audioPath = "srijonmusic.webm";
@@ -97,7 +98,11 @@ app.post("/videofetch", (req, res) => {
         .outputOptions("-shortest")
         .on("end", () => {
           console.log("✅ Merge done");
-          res.download(outputPath); // Send final merged video to frontend
+          res.status(200).json({
+            message: "Viddeo conversion started. Check output.mp4 after a while.",
+            url: "http://localhost:3000/Video/ytdone.mp4"
+          }
+          )
         })
         .on("error", (err) => {
           console.error("❌ Merge error:", err);
@@ -109,7 +114,7 @@ app.post("/videofetch", (req, res) => {
 
   // ✅ Step 1: Download video
   const videoStream = fs.createWriteStream(videoPath);
-  ytdl(videourlvalue, { quality: "137" }) // Best 1080p video-only stream
+  ytdl(videourlvalue, { quality: "299" }) 
     .on("error", (err) => {
       console.error("❌ Video error:", err);
       res.status(500).send("❌ Video download failed");

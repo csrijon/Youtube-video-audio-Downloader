@@ -6,7 +6,9 @@ import "./Navbar.css"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+const buttonclick = () => {
+  setIsOpen(false)
+}
   const toggleMenu = () => setIsOpen(!isOpen);
   return (
     <div className="navbar-wrapper">
@@ -15,11 +17,11 @@ const Navbar = () => {
           <p className="logo">YT Fetch</p>
         </div>
 
-        <div className={`nav-links ${isOpen ? 'active' : ''}`}>
+        <div className={`nav-links ${isOpen ? 'active' : 'close'}`}>
           <ul>
-            <li> <Link to="/login">Video</Link></li>
-            <li><Link to="/Music">Video Downloader</Link></li>
-            <li><Link to="/Video">Audio Downloader</Link></li>
+            <li> <Link to="/login" onClick={buttonclick} >Video</Link></li>
+            <li><Link to="/Music" onClick={buttonclick} >Video Downloader</Link></li>
+            <li><Link to="/Video" onClick={buttonclick} >Audio Downloader</Link></li>
           </ul>
         </div>
 

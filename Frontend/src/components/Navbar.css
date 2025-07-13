@@ -79,6 +79,9 @@
   .nav-links.active {
     display: flex;
   }
+  .nav-links.close{
+    display: none;
+  }
 
   .nav-links ul {
     flex-direction: column;
