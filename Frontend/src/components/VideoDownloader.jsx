@@ -1,13 +1,11 @@
 import React, { useState, useRef } from 'react';
-import ClipLoader from 'react-spinners/ClipLoader';
+import birds from "../assets/birds.jpg"
 import './VideoDownloader.css';
 
 const VideoDownloader = () => {
   const [url, setUrl] = useState('');
   const [music, updatemusicurl] = useState('');
-  // const [quality, setQuality] = useState('720p');
   const [loading, setLoading] = useState(false);
-  // const videoRef = useRef(null);
   const videourlref = useRef(null);
 
   const fetchvideoclick = async () => {
@@ -60,13 +58,12 @@ const VideoDownloader = () => {
           </button>
 
           {loading && (
-            <div style={{ marginTop: "20px" }}>
-              <ClipLoader color="#3b82f6" size={36} />
-              <p style={{ color: "#e0f2fe", marginTop: "8px" }}>Converting to MP3...</p>
+            <div style={{ marginTop: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <span className="loader"></span>
+              <p style={{ color: "#e5e7eb", marginTop: "12px" }}>Please wait, fetching video...</p>
             </div>
           )}
 
-          {/* <a href={music}></a> */}
         </div>
       </div>
       {music && (
@@ -76,7 +73,7 @@ const VideoDownloader = () => {
             <div className="music-box">
               <div className="music-info">
                 <img
-                  src="https://via.placeholder.com/60"
+                  src={birds}
                   alt="thumbnail"
                   className="music-thumbnail"
                 />
@@ -106,7 +103,6 @@ const VideoDownloader = () => {
           </div>
         </div>
       )}
-
     </>
   );
 };
