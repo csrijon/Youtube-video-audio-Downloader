@@ -51,7 +51,7 @@ app.post("/songfetch", async (req, res) => {
       .save(path.join(__dirname, "Public", "Audio", "song.mp3"));
     res.status(200).json({
       message: "Audio conversion started. Check output.mp3 after a while.",
-      url: "http://localhost:3000/Audio/song.mp3"
+      url: "/Audio/song.mp3"
     });
 
   } catch (err) {
@@ -118,7 +118,7 @@ app.post("/videofetch", (req, res) => {
             responseSent = true;
             res.status(200).json({
               message: "Video processing complete",
-              url: "http://localhost:3000/Video/ytdone.mp4"
+              url: "/Video/ytdone.mp4"
             });
           }
         })
