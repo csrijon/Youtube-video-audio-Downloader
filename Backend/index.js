@@ -14,7 +14,12 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const port = 3000;
 
-app.use(cors());
+app.use(cors({
+  origin: "https://ytfetchss.netlify.app",
+  methods: ["GET", "POST"],
+  credentials: true
+}));
+
 app.use(express.json());
 app.use(express.static("Public"))
 
