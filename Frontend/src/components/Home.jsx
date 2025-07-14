@@ -1,6 +1,6 @@
 import React from 'react';
 import './Home.css';
-import logo from '../assets/srijon.jpeg'; // optional image
+import logo from '../assets/tech.jpg'; // optional image
 
 const Home = () => {
   return (

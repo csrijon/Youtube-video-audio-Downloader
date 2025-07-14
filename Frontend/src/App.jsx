@@ -18,11 +18,11 @@ function App() {
       element: <><Navbar/><Home/><Footer/></>
     },
     {
-      path: "/Music",
+      path: "/Video",
       element : <><Navbar/><AudioDownloader/><Footer/></>
     },
     {
-      path: "/Video",
+      path: "/Music",
       element: <><Navbar/><VideoDownloader/><Footer/></>
     }
   ])

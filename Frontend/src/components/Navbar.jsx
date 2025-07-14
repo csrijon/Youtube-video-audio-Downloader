@@ -20,8 +20,8 @@ const buttonclick = () => {
         <div className={`nav-links ${isOpen ? 'active' : 'close'}`}>
           <ul>
             <li> <Link to="/Home" onClick={buttonclick} >Home</Link></li>
-            <li><Link to="/Music" onClick={buttonclick} >Video Downloader</Link></li>
-            <li><Link to="/Video" onClick={buttonclick} >Audio Downloader</Link></li>
+            <li><Link to="/Video" onClick={buttonclick} >Video Downloader</Link></li>
+            <li><Link to="/Music" onClick={buttonclick} >Audio Downloader</Link></li>
           </ul>
         </div>
 
