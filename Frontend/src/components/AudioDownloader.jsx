@@ -23,7 +23,7 @@ const AudioDownloader = () => {
       videoqualityvalue: videovalue
     };
 
-    const videourl = "https://ytfetch-4y6t.onrender.com/videofetch";
+    const videourl = "https://youtube-video-audio-downloader-1.onrender.com/videofetch";
     const videooption = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -96,7 +96,7 @@ const AudioDownloader = () => {
         {videoReady && (
           <div style={{ marginTop: '20px', textAlign: 'center' }}>
             <a
-              href="https://ytfetch-4y6t.onrender.com/videodownload"
+              href="https://youtube-video-audio-downloader-1.onrender.com/videodownload"
               className="download-btn"
               download
             >

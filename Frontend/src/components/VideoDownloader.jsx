@@ -19,7 +19,7 @@ const VideoDownloader = () => {
 
     const videovalue = { url: videourl };
 
-    const videofetchurl = "https://ytfetch-4y6t.onrender.com/songfetch";
+    const videofetchurl = "https://youtube-video-audio-downloader-1.onrender.com/songfetch";
     const requestOptions = {
       method: "post",
       headers: { "Content-Type": "application/json" },
@@ -93,7 +93,7 @@ const VideoDownloader = () => {
     button.textContent = "Preparing music..."; // User feedback
 
     setTimeout(() => {
-      window.location.href = "https://ytfetch-4y6t.onrender.com/download";
+      window.location.href = "https://youtube-video-audio-downloader-1.onrender.com/download";
       button.textContent = "Download Music"; // Optional reset if user cancels
     }, 5000); // 2 second delay
   }}
