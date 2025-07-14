@@ -83,25 +83,40 @@ const VideoDownloader = () => {
                   <p className="music-filename">song.mp3</p>
                 </div>
               </div>
-            <a
-  href="#"
-  className="download-music-btn"
-  onClick={(e) => {
-    e.preventDefault();
+              <a
+                href="#"
+                className="download-music-btn"
+                onClick={(e) => {
+                  e.preventDefault();
 
-    const button = e.currentTarget;
-    button.textContent = "Preparing music..."; // User feedback
+                  const button = e.currentTarget;
+                  button.textContent = "Preparing music... ⏳";
 
-    setTimeout(() => {
-      window.location.href = "https://youtube-video-audio-downloader-1.onrender.com/download";
-      button.textContent = "Download Music"; // Optional reset if user cancels
-    }, 5000); // 2 second delay
-  }}
->
-  Download Music
-</a>
+                  // ⏱️ Wait 5–7 seconds (adjust if needed)
+                  setTimeout(async () => {
+                    try {
+                      // 🔍 Check if file is ready (HEAD does not download)
+                      const check = await fetch("https://youtube-video-audio-downloader-1.onrender.com/download", {
+                        method: "HEAD",
+                      });
 
-
+                      if (check.ok) {
+                        // ✅ Start download
+                        window.location.href = "https://youtube-video-audio-downloader-1.onrender.com/download";
+                        button.textContent = "Download Music 🎵";
+                      } else {
+                        // ❌ File not ready
+                        button.textContent = "File not ready. Try again.";
+                      }
+                    } catch (err) {
+                      console.error("Download check failed:", err);
+                      button.textContent = "Error. Try again.";
+                    }
+                  }, 7000); // ⏳ Adjust as needed (7 seconds here)
+                }}
+              >
+                Download Music
+              </a>
             </div>
           </div>
         </div>
