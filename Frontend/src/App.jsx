@@ -14,6 +14,10 @@ function App() {
       element: <><Navbar/><Home/><Footer/></>
     },
     {
+      path: "/Home",
+      element: <><Navbar/><Home/><Footer/></>
+    },
+    {
       path: "/Music",
       element : <><Navbar/><AudioDownloader/><Footer/></>
     },

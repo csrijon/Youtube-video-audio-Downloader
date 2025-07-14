@@ -4,7 +4,7 @@ import './VideoDownloader.css';
 
 const VideoDownloader = () => {
   const [url, setUrl] = useState('');
-  const [music, updatemusicurl] = useState('');
+  const [music, updatemusicurl] = useState(false);
   const [loading, setLoading] = useState(false);
   const videourlref = useRef(null);
 
@@ -28,10 +28,11 @@ const VideoDownloader = () => {
 
     try {
       setLoading(true);
+      updatemusicurl(false)
       const videoresponse = await fetch(videofetchurl, requestOptions);
       const videodata = await videoresponse.json();
-      updatemusicurl(videodata.url);
-      console.log('Fetched video data:', videodata);
+      console.log('Fetched audio data:', videodata);
+      updatemusicurl(true)
     } catch (error) {
       console.error("Error fetching video:", error);
     } finally {
@@ -82,22 +83,24 @@ const VideoDownloader = () => {
                   <p className="music-filename">song.mp3</p>
                 </div>
               </div>
-              <a
-                href="#"
-                className="download-music-btn"
-                onClick={(e) => {
-                  e.preventDefault(); // prevent immediate download
-                  const button = e.currentTarget;
-                  button.textContent = "Preparing music..."; // show feedback
+            <a
+  href="#"
+  className="download-music-btn"
+  onClick={(e) => {
+    e.preventDefault();
 
-                  setTimeout(() => {
-                    window.location.href = "http://localhost:3000/download"; // trigger download after delay
-                    button.textContent = "Download Music"; // optional reset
-                  }, 10000); // 3-second delay (adjust as needed)
-                }}
-              >
-                Download Music
-              </a>
+    const button = e.currentTarget;
+    button.textContent = "Preparing music..."; // User feedback
+
+    setTimeout(() => {
+      window.location.href = "http://localhost:3000/download";
+      button.textContent = "Download Music"; // Optional reset if user cancels
+    }, 5000); // 2 second delay
+  }}
+>
+  Download Music
+</a>
+
 
             </div>
           </div>
